@@ -23,7 +23,6 @@ function showCountriesList(resp) {
 		country.appendTo(countriesList);
 		$('<li>').addClass('flag').appendTo(country);
 		$('<img>').attr('src' , item.flag).appendTo($('.flag'));
-		console.log(item.flag);i++;console.log(i);
 		$('<li>').text('Name : ' + item.name).appendTo(country);
 		$('<li>').text('Native name : ' + item.nativeName).appendTo(country);
 		$('<li>').text('Capital : ' + item.capital).appendTo(country);
