@@ -10,8 +10,9 @@ function searchCountries() {
   		success: showCountriesList
   	});
 }
+
 function showCountriesList(resp) {
-	countriesList.empty();var i=0;
+	countriesList.empty();
 	resp.forEach(function(item) {
 		if(item.capital==""){
 			item.capital='null';
@@ -20,19 +21,28 @@ function showCountriesList(resp) {
 			item.area='null';
 		}
 		var country = $('<ul>').addClass('country');
+		var image = $('<img>').attr('src' , item.flag);
 		country.appendTo(countriesList);
-		$('<li>').addClass('flag').appendTo(country);
-		$('<img>').attr('src' , item.flag).appendTo($('.flag'));
+		$('<li>').addClass('flag').prepend(image).appendTo(country);
 		$('<li>').text('Name : ' + item.name).appendTo(country);
 		$('<li>').text('Native name : ' + item.nativeName).appendTo(country);
+		$('<li>').text('Alternative : ' + item.altSpellings).appendTo(country);
 		$('<li>').text('Capital : ' + item.capital).appendTo(country);
 		$('<li>').text('Area : ' + item.area).appendTo(country);
 		$('<li>').text('Population : ' + item.population).appendTo(country);
-		$('<p>').text('Languages : ').appendTo(country);
+		if(item.borders.length>0){
+			$('<li>').text('Borders: ' + item.borders).appendTo(country);
+		}
+		else{
+			$('<li>').text('Borders: None').appendTo(country);
+		}
+		var languages = $('<li>');
+		$('<p>').text('Languages : ').appendTo(languages);
+		languages.appendTo(country);
 		item.languages.forEach(function(language){
-			$('<p>').text(language.name).appendTo(country);
+			$('<p>').text(language.name).appendTo(languages);
 			if(language.name!==language.nativeName){
-				$('<p>').addClass('native').text('(' + language.nativeName + ')').appendTo(country);
+				$('<p>').addClass('native').text('(' + language.nativeName + ')').appendTo(languages);
 			}
 		});
 	});
