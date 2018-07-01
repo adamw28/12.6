@@ -13,7 +13,7 @@ function searchCountries() {
 
 function showCountriesList(resp) {
 	countriesList.empty();
-	resp.forEach(function(item) {console.log(item);
+	resp.forEach(function(item) {
 		if(item.capital==""){
 			item.capital='null';
 		}
