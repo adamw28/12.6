@@ -13,7 +13,7 @@ function searchCountries() {
 
 function showCountriesList(resp) {
 	countriesList.empty();
-	resp.forEach(function(item) {
+	resp.forEach(function(item) {console.log(item);
 		if(item.capital==""){
 			item.capital='null';
 		}
@@ -30,6 +30,15 @@ function showCountriesList(resp) {
 		$('<li>').text('Capital : ' + item.capital).appendTo(country);
 		$('<li>').text('Area : ' + item.area).appendTo(country);
 		$('<li>').text('Population : ' + item.population).appendTo(country);
+		var currencies = $('<li>');
+		$('<p>').text('Currency : ').appendTo(currencies);
+		currencies.appendTo(country);
+		item.currencies.forEach(function(currency){
+			$('<p>').text(currency.code).appendTo(currencies);
+			$('<p>').text(currency.name).appendTo(currencies);
+			$('<p>').text(currency.symbol).appendTo(currencies);
+		});
+		$('<br>').appendTo(country);
 		if(item.borders.length>0){
 			$('<li>').text('Borders: ' + item.borders).appendTo(country);
 		}
